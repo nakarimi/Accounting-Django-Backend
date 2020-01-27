@@ -139,3 +139,5 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:4200',
     'http://localhost:8000',
 ]
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = 'E:/Project/accountingPy/uploads'

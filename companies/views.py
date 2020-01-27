@@ -33,7 +33,19 @@ class CompanyViewSet(viewsets.ViewSet):
         return HttpResponse("Item Created with Post method")
 
     def update(self, request, pk=None):
-        return HttpResponse("Item updated with put method")
+        data = request.data
+        company = Company.objects.get(pk = pk)
+        company.com_address = data['com_address']
+        company.com_email = data['com_email']
+        company.com_name = data['com_name']
+        # company.com_logo = data['com_logo']
+        company.com_owner = data['com_owner']
+        company.com_phone = data['com_phone']
+        # company.com_status = data['com_status']
+        # company.com_website = data['com_website']
+        company.save()
+        serializer = CompanySerializer(company)
+        return JsonResponse(serializer.data, safe=False)
 
     def partial_update(self, request, pk=None):
         return HttpResponse("Item Patched")
