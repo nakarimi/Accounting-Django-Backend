@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from pytz import unicode
 from rest_framework import viewsets
-from api.serializers import UserSerializer, GroupSerializer
+from apps.api.serializers import UserSerializer, GroupSerializer
 from django.http import HttpResponse, JsonResponse
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated

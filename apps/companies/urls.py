@@ -1,4 +1,4 @@
-from companies.views import CompanyViewSet
+from apps.companies.views import CompanyViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()

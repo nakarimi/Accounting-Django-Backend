@@ -2,8 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ff61595-77a7-44f8-a146-cd02e4e25bb0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/companies/migrations/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companies/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companies/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companies/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companies/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companies/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companies/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companies/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companies/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companies/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companies/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
     </list>

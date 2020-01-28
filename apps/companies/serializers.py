@@ -1,4 +1,4 @@
-from companies.models import Company
+from apps.companies.models import Company
 from rest_framework import serializers
 
 
