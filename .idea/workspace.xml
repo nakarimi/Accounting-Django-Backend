@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="9ff61595-77a7-44f8-a146-cd02e4e25bb0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/companies/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/companies/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/companies/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companies/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/companies/Lowes_logo_pms_280_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/uploads/companies/J8rS6FNE.jpeg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +37,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/companies" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -163,5 +167,14 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="519" y="45" key="#SERVER/0.0.1600.860@0.0.1600.860" timestamp="1580660930368" />
+    <state x="547" y="287" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1581079776682">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="547" y="287" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1600.860@0.0.1600.860" timestamp="1581079776682" />
+    <state x="496" y="255" key="com.intellij.ide.util.TipDialog" timestamp="1580980021463">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="496" y="255" key="com.intellij.ide.util.TipDialog/0.0.1600.860/1600.0.1536.824@0.0.1600.860" timestamp="1580980021462" />
+    <state x="496" y="255" key="com.intellij.ide.util.TipDialog/0.0.1600.860@0.0.1600.860" timestamp="1580737735627" />
   </component>
 </project>

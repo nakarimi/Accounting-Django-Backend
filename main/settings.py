@@ -43,6 +43,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'apps.api',
     'apps.companies',
+    'apps.Accounts',
+    'apps.Customers',
+    'apps.Bills',
+    'apps.Invoices',
+    'apps.Items',
+    'apps.Payments',
+    'apps.Products',
+    'apps.Vendors',
 ]
 
 REST_FRAMEWORK = {
@@ -59,8 +67,9 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsPostCsrfMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -135,9 +144,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:4200',
-    'http://localhost:8000',
-]
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:4200',
+#     'http://localhost:8000',
+# ]
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = 'E:/Project/accountingPy/uploads'

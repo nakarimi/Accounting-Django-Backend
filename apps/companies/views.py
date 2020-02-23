@@ -6,12 +6,14 @@ from django.contrib.auth.models import User
 from apps.companies.models import Company
 from rest_framework import viewsets
 from apps.companies.serializers import CompanySerializer
+from rest_framework.parsers import FileUploadParser, FormParser
 from .forms import CompanyForm
 
 # Create your views here.
 
 
 class CompanyViewSet(viewsets.ViewSet):
+    parser_classes = [FormParser]
     permission_classes = [
         # IsAuthenticated,
         # IsAuthenticatedOrReadOnly,
@@ -31,6 +33,17 @@ class CompanyViewSet(viewsets.ViewSet):
         return JsonResponse(serializer.data, safe=False)
 
     def create(self, request):
+        # resutl = Company.objects.create(
+        #     com_name = request.data['com_name'],
+        #     com_email = request.data['com_email'],
+        #     # com_logo = request.data['com_logo'],
+        #     com_owner = request.data['com_owner'],
+        #     com_status = request.data['com_status'],
+        #     com_address = request.data['com_address'],
+        #     com_phone = request.data['com_phone'],
+        # )
+        # return HttpResponse('resutl')
+        # return HttpResponse(request.data, safe=False)
         company = CompanyForm(request.data, request.FILES)
         if company.is_valid():
             company = company.save()
