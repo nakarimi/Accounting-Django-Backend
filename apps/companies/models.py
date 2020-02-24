@@ -16,5 +16,7 @@ class Company(models.Model):
     com_phone = models.CharField(max_length=10, verbose_name ="Phone")
     com_logo = models.FileField(upload_to='companies/', verbose_name ="Logo", null=True)
     pub_date = models.DateTimeField( auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
