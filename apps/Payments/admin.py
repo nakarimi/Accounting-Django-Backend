@@ -1,7 +1,8 @@
 from django.contrib import admin
+from .models import Payment
 
 # Register your models here.
-# # admin.site.register(Company)
+admin.site.register(Payment)
 # @admin.register(Company)
 # class CategoryAdmin(admin.ModelAdmin):
 #     list_display = ('com_name', 'com_email', 'com_website', 'com_owner')
