@@ -6,6 +6,9 @@ from ..Payments.models import Payment
 
 
 class Transaction(models.Model):
+    class Meta:
+        db_table = 'transaction'
+
     def __str__(self):
         return self.label
 

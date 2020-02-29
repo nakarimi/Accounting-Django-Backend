@@ -6,6 +6,9 @@ from djmoney.models.fields import MoneyField
 
 
 class Invoice(models.Model):
+    class Meta:
+        db_table = 'invoice'
+
     def __str__(self):
         return self.inv_number
 
@@ -13,6 +16,8 @@ class Invoice(models.Model):
     items = models.ForeignKey(Item, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     total_price = MoneyField(max_digits=14, decimal_places=2,
+                          default_currency='USD')
+    balance = MoneyField(max_digits=14, decimal_places=2,
                           default_currency='USD')
     due_date = models.DateField()
     status = models.BooleanField(default=1)

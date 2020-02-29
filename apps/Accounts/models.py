@@ -3,6 +3,8 @@ from djmoney.models.fields import MoneyField
 # Create your models here.
 
 class Account(models.Model):
+    class Meta:
+        db_table = 'account'
     def __str__(self):
         return self.label
 
@@ -15,6 +17,3 @@ class Account(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
   
-
-class Type(models.Model):
-    label = models.CharField(max_length=20, unique=True)

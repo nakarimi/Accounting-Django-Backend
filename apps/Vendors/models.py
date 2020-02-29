@@ -4,6 +4,9 @@ from django.db import models
 
 
 class Vendor(models.Model):
+    class Meta:
+        db_table = 'vendor'
+
     def __str__(self):
         return self.label
 
