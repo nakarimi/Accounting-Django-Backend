@@ -28,8 +28,9 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
     path('api/', include('apps.api.urls')),
-    path('company/', include('apps.companies.urls')),
+    path('acnt/', include('apps.account.urls')),
     path('', admin.site.urls),
     path('auth/', obtain_auth_token),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
