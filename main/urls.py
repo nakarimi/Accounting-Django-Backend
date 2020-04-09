@@ -31,6 +31,7 @@ urlpatterns = [
 
     path('api/', include('apps.api.urls')),
     path('acnt/', include('apps.account.urls')),
+    # path('account/', include('apps.account.urls')),
     path('', admin.site.urls),
     path('auth/', obtain_auth_token),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

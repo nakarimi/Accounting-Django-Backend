@@ -33,6 +33,7 @@ class AccountViewSet(viewsets.ViewSet):
       return JsonResponse(account.errors, safe=False)
 
   def update(self, request, pk):
+    # return HttpResponse("Item Patched")
     instance = get_object_or_404(Account, id=pk)
     account = AccountForm(request.data, instance=instance)
     if account.is_valid():
