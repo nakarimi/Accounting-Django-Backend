@@ -30,7 +30,7 @@ class CustomerViewSet(viewsets.ViewSet):
       serializer = CustomerSerializer(customer)
       return JsonResponse(serializer.data, safe=False)
     else:
-      return JsonResponse(customer.errors, safe=False)
+      return JsonResponse({'error': customer.errors}, safe=False)
     # return HttpResponse('True')
 
   def update(self, request, pk):
@@ -42,7 +42,7 @@ class CustomerViewSet(viewsets.ViewSet):
       serializer = CustomerSerializer(customer)
       return JsonResponse(serializer.data, safe=False)
     else:
-      return JsonResponse(customer.errors, safe=False)
+      return JsonResponse({'error': customer.errors}, safe=False)
 
 
   def partial_update(self, request, pk=None):

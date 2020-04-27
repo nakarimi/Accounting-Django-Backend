@@ -1,52 +1,53 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
-from .models import Account
+from .models import Invoice
 from rest_framework import viewsets
-from .serializers import AccountSerializer
+from .serializers import InvoiceSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
-from .forms import AccountForm
+from .forms import InvoiceForm
 # Create your views here.
 
 
-class AccountViewSet(viewsets.ViewSet):
+class InvoiceViewSet(viewsets.ViewSet):
 
   def list(self, request):
-    serializer = AccountSerializer(Account.objects.all(), many=True)
+    serializer = InvoiceSerializer(Invoice.objects.all(), many=True)
     return JsonResponse(serializer.data, safe=False)
 
   def retrieve(self, request, pk=None):
 
-    # account = Account.objects.all()
-    # account = get_object_or_404(Account, pk=pk)
-    # serializer = AccountSerializer(account)
+    # invoice = Invoice.objects.all()
+    # invoice = get_object_or_404(Invoice, pk=pk)
+    # serializer = InvoiceSerializer(invoice)
     # return JsonResponse(serializer.data, safe=False)
     return HttpResponse('True')
 
   def create(self, request):
-    account = AccountForm(request.data)
-    if account.is_valid():
-      account = account.save()
-      serializer = AccountSerializer(account)
+    invoice = InvoiceForm(request.data)
+    if invoice.is_valid():
+      invoice = invoice.save()
+      serializer = InvoiceSerializer(invoice)
       return JsonResponse(serializer.data, safe=False)
     else:
-      return JsonResponse({'error': account.errors}, safe=False)
+      return JsonResponse({'error': invoice.errors}, safe=False)
 
   def update(self, request, pk):
     # return HttpResponse("Item Patched")
-    instance = get_object_or_404(Account, id=pk)
-    account = AccountForm(request.data, instance=instance)
-    if account.is_valid():
-      account = account.save()
-      serializer = AccountSerializer(account)
+    instance = get_object_or_404(Invoice, id=pk)
+    invoice = InvoiceForm(request.data, instance=instance)
+    if invoice.is_valid():
+      invoice = invoice.save()
+      serializer = InvoiceSerializer(invoice)
       return JsonResponse(serializer.data, safe=False)
     else:
-      return JsonResponse({'error': account.errors}, safe=False)
+      return JsonResponse({'error': invoice.errors}, safe=False)
+
 
   def partial_update(self, request, pk=None):
     return HttpResponse("Item Patched")
 
   def destroy(self, request, pk=None):
-    instance = Account.objects.filter(pk=pk)
+    instance = Invoice.objects.filter(pk=pk)
     instance.delete()
     return HttpResponse('True')
