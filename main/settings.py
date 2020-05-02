@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'djmoney',
     'apps.api',
+    'apps.uploadapp',
     'apps.account',
     'apps.customer',
     # 'apps.bill',

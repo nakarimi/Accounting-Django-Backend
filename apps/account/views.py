@@ -3,13 +3,15 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from .models import Account
 from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework import status
 from .serializers import AccountSerializer
-from rest_framework.parsers import FileUploadParser, FormParser
-from .forms import AccountForm
+from rest_framework.parsers import FileUploadParser
 # Create your views here.
 
 
 class AccountViewSet(viewsets.ViewSet):
+  parser_class = (FileUploadParser,)
 
   def list(self, request):
     serializer = AccountSerializer(Account.objects.all(), many=True)
@@ -23,28 +25,42 @@ class AccountViewSet(viewsets.ViewSet):
     # return JsonResponse(serializer.data, safe=False)
     return HttpResponse('True')
 
-  def create(self, request):
-    account = AccountForm(request.data)
-    if account.is_valid():
-      account = account.save()
-      serializer = AccountSerializer(account)
-      return JsonResponse(serializer.data, safe=False)
+  def create(self, request, *args, **kwargs):
+    serializer = AccountSerializer(data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
-      return JsonResponse({'error': account.errors}, safe=False)
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-  def update(self, request, pk):
-    # return HttpResponse("Item Patched")
+  def update(self, request, pk, *args, **kwargs):
     instance = get_object_or_404(Account, id=pk)
-    account = AccountForm(request.data, instance=instance)
-    if account.is_valid():
-      account = account.save()
-      serializer = AccountSerializer(account)
-      return JsonResponse(serializer.data, safe=False)
+
+    serializer = AccountSerializer(data=request.data, instance=instance)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
-      return JsonResponse({'error': account.errors}, safe=False)
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # instance = get_object_or_404(Account, id=pk)
+    # account = AccountForm(request.data, instance=instance)
+    # if account.is_valid():
+    #   account = account.save()
+    #   serializer = AccountSerializer(account)
+    #   return JsonResponse(serializer.data, safe=False)
+    # else:
+    #   return JsonResponse({'error': account.errors}, safe=False)
 
   def partial_update(self, request, pk=None):
-    return HttpResponse("Item Patched")
+    instance = get_object_or_404(Account, id=pk)
+
+    serializer = AccountSerializer(data=request.data, instance=instance)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
   def destroy(self, request, pk=None):
     instance = Account.objects.filter(pk=pk)
