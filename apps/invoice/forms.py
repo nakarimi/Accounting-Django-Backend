@@ -7,7 +7,6 @@ class InvoiceForm(ModelForm):
         model = Invoice
         fields = [
           'inv_number',
-          'items',
           'customer',
           'currency',
           'total_price',

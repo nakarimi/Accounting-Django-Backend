@@ -2,6 +2,5 @@ from .views import InvoiceViewSet, LastInvViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'', InvoiceViewSet, basename='invoice')
-
+router.register(r'', LastInvViewSet, basename='last_invoice')
 urlpatterns = router.urls

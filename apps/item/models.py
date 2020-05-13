@@ -1,4 +1,5 @@
 from django.db import models
+from ..invoice.models import Invoice
 
 # Create your models here.
 class Item(models.Model):
@@ -9,6 +10,7 @@ class Item(models.Model):
         return self.label
 
     label = models.CharField(max_length=50, null=True)
+    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)
     price = models.IntegerField()
     quantity = models.IntegerField()
     total = models.IntegerField()

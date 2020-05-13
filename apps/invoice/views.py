@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
-from .models import Invoice
+from .models import Invoice, Invoice_num
+from rest_framework import status
 from rest_framework import viewsets
-from .serializers import InvoiceSerializer
+from .serializers import InvoiceSerializer, InvoiceNumSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
 from .forms import InvoiceForm
+from rest_framework.response import Response
+
 # Create your views here.
 
 
@@ -24,13 +27,13 @@ class InvoiceViewSet(viewsets.ViewSet):
     return HttpResponse('True')
 
   def create(self, request):
-    invoice = InvoiceForm(request.data)
-    if invoice.is_valid():
-      invoice = invoice.save()
-      serializer = InvoiceSerializer(invoice)
-      return JsonResponse(serializer.data, safe=False)
+    inv = InvoiceSerializer(data=request.data)
+    if inv.is_valid():
+      instance = inv.save()
+      Invoice_num.objects.create(invoice=instance)
+      return Response(inv.data, status=status.HTTP_201_CREATED)
     else:
-      return JsonResponse({'error': invoice.errors}, safe=False)
+      return Response(inv.errors, status=status.HTTP_400_BAD_REQUEST)
 
   def update(self, request, pk):
     # return HttpResponse("Item Patched")
@@ -51,3 +54,9 @@ class InvoiceViewSet(viewsets.ViewSet):
     instance = Invoice.objects.filter(pk=pk)
     instance.delete()
     return HttpResponse('True')
+  
+class LastInvViewSet(viewsets.ViewSet):
+
+  def list(self, request):
+    serializer = InvoiceNumSerializer(Invoice_num.objects.last())
+    return JsonResponse(serializer.data, safe=False)

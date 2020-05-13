@@ -35,6 +35,8 @@ urlpatterns = [
     path('csmr/', include('apps.customer.urls')),
     path('vdr/', include('apps.vendor.urls')),
     path('inv/', include('apps.invoice.urls')),
+    path('itm/', include('apps.item.urls')),
+    path('last_inv/', include('apps.invoice.urls_last')),
     path('', admin.site.urls),
     path('auth/', obtain_auth_token),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
