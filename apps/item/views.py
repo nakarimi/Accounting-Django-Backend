@@ -35,7 +35,7 @@ class ItemViewSet(viewsets.ViewSet):
       instance = item.save()
       return Response(item.data, status=status.HTTP_201_CREATED)
     else:
-      return Response(item.errors, status=status.HTTP_400_BAD_REQUEST)
+      return Response({'error': item.errors})
 
   # def update(self, request, pk):
   #   # return HttpResponse("Item Patched")
@@ -52,7 +52,7 @@ class ItemViewSet(viewsets.ViewSet):
   # def partial_update(self, request, pk=None):
   #   return HttpResponse("Item Patched")
 
-  # def destroy(self, request, pk=None):
-  #   instance = Item.objects.filter(pk=pk)
-  #   instance.delete()
-  #   return HttpResponse('True')
+  def destroy(self, request, pk=None):
+    instance = Item.objects.filter(pk=pk)
+    instance.delete()
+    return HttpResponse('True')
