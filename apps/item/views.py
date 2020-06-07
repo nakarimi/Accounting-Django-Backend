@@ -14,7 +14,7 @@ class ItemViewSet(viewsets.ViewSet):
 
   def list(self, request):
     queryset = Item.objects.all()
-    inv_id = self.request.query_params.get('inv_id', None)
+    inv_id = self.request.query_params.get('entity_id', None)
     if inv_id is not None:
         queryset = queryset.filter(invoice_id=inv_id)
     

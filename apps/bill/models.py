@@ -1,16 +1,16 @@
 from django.db import models
-from ..customer.models import Customer
+from ..vendor.models import Vendor
 
 # Create your models here.
-class Invoice(models.Model):
+class Bill(models.Model):
     class Meta:
-        db_table = 'invoice'
+        db_table = 'bill'
 
     def __str__(self):
-        return self.inv_number
+        return self.bill_number
 
-    inv_number = models.CharField(max_length=20, default=0, blank=True)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    bill_number = models.CharField(max_length=20, default=0, blank=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     currency = models.CharField(max_length=5)
     total_price = models.IntegerField()
     balance = models.IntegerField()
@@ -19,9 +19,9 @@ class Invoice(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Invoice_num(models.Model):
+class Bill_num(models.Model):
     class Meta:
-        db_table = 'invoice_num'
+        db_table = 'bill_num'
     
-    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)
+    bill = models.ForeignKey(Bill, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

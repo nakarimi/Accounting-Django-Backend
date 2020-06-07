@@ -36,7 +36,10 @@ urlpatterns = [
     path('vdr/', include('apps.vendor.urls')),
     path('inv/', include('apps.invoice.urls')),
     path('itm/', include('apps.item.urls')),
+    path('bitm/', include('apps.bill_item.urls')),
+    path('bil/', include('apps.bill.urls')),
     path('last_inv/', include('apps.invoice.urls_last')),
+    path('last_bil/', include('apps.bill.urls_last')),
     path('', admin.site.urls),
     path('auth/', obtain_auth_token),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
