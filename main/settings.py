@@ -50,10 +50,10 @@ INSTALLED_APPS = [
     'apps.bill_item',
     'apps.invoice',
     'apps.item',
-    # 'apps.payment',
+    'apps.payment',
     # 'apps.entity',
     'apps.vendor',
-    # 'apps.transaction',
+    'apps.transaction',
 ]
 
 REST_FRAMEWORK = {
