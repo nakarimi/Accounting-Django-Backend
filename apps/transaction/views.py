@@ -7,14 +7,17 @@ from rest_framework import viewsets
 from .serializers import TransactionSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
 from rest_framework.response import Response
-
+from django.db.models import Count, Sum
 # Create your views here.
 
 
 class TransactionViewSet(viewsets.ViewSet):
 
   def list(self, request):
-    serializer = TransactionSerializer(Transaction.objects.all(), many=True)
+
+    data = Transaction.objects.filter(created_at__range=["2020-06-01", "2020-06-20"]).annotate(data_sum=Sum('amount'))
+
+    serializer = TransactionSerializer(data, many=True)
     return JsonResponse(serializer.data, safe=False)
 
   def retrieve(self, request, pk=None):
