@@ -25,10 +25,11 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
+    path('', admin.site.urls),
+    path('auth/', obtain_auth_token),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-
     path('api/', include('apps.api.urls')),
     path('api/upload/', include('apps.uploadapp.urls')),
     path('api/trs/', include('apps.transaction.urls')),
@@ -42,7 +43,5 @@ urlpatterns = [
     path('api/bil/', include('apps.bill.urls')),
     path('api/last_inv/', include('apps.invoice.urls_last')),
     path('api/last_bil/', include('apps.bill.urls_last')),
-    path('', admin.site.urls),
-    path('auth/', obtain_auth_token),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

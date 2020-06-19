@@ -9,13 +9,10 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
-from pprint import pprint
-
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
@@ -24,7 +21,13 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+class UserIdViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
+        
 class HelloView(APIView):
     # permission_classes = [IsAuthenticated]
 
