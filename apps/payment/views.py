@@ -9,6 +9,7 @@ from rest_framework import viewsets
 from .serializers import PaymentSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
 from rest_framework.response import Response
+from datetime import timedelta, datetime
 
 # Create your views here.
 
@@ -16,7 +17,21 @@ from rest_framework.response import Response
 class PaymentViewSet(viewsets.ViewSet):
 
   def list(self, request):
-    serializer = PaymentSerializer(Payment.objects.all(), many=True)
+
+    start = self.request.query_params.get('start', None)
+    if(start != None):
+      end = self.request.query_params.get('end', None)
+      end = datetime.strptime(end, "%Y-%m-%d") + timedelta(days=1)
+      type = self.request.query_params.get('type', None)
+      serializer = PaymentSerializer(
+        Payment.objects.filter(
+          created_at__range=[start, end],
+          ),
+        many=True)
+    else:
+      serializer = PaymentSerializer(
+        Payment.objects.all(),
+        many=True)
     return JsonResponse(serializer.data, safe=False)
 
   def retrieve(self, request, pk=None):

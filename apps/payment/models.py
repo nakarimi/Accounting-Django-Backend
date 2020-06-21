@@ -14,7 +14,7 @@ class Payment(models.Model):
         return self.label
 
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    label = models.CharField(max_length=20, unique=True)
+    label = models.CharField(max_length=50)
     type = models.CharField(max_length=20)
     ref_bill = models.ForeignKey(Bill, on_delete=models.CASCADE, null=True)
     ref_inv = models.ForeignKey(Invoice, on_delete=models.CASCADE, null=True)

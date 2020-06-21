@@ -11,7 +11,7 @@ class Transaction(models.Model):
     def __str__(self):
         return self.label
 
-    label = models.CharField(max_length=20, unique=True)
+    label = models.CharField(max_length=50)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
     amount = models.IntegerField()
