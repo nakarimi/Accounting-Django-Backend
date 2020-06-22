@@ -6,8 +6,8 @@ class Account(models.Model):
     class Meta:
         db_table = 'account'
 
-    label = models.CharField(max_length=20, unique=True)
-    owner = models.CharField(max_length=20)
+    label = models.CharField(max_length=50, unique=True)
+    owner = models.CharField(max_length=50)
     balance = models.IntegerField()
     currency = models.CharField(max_length=5, blank=True)
     desc = models.CharField(max_length=200, blank=True)

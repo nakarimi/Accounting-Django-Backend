@@ -50,7 +50,7 @@ class PaymentViewSet(viewsets.ViewSet):
       # Create the transaction.
       Transaction.objects.create(
         label = 'test',
-        account = Account.objects.get(id=3),
+        account = Account.objects.get(id=instance.account.id),
         payment = instance,
         amount = 1000,
       )
