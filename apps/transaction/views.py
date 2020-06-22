@@ -15,7 +15,7 @@ class TransactionViewSet(viewsets.ViewSet):
 
   def list(self, request):
 
-    data = Transaction.objects.filter(created_at__range=["2020-06-01", "2020-06-20"]).annotate(data_sum=Sum('amount'))
+    data = Transaction.objects.all()
 
     serializer = TransactionSerializer(data, many=True)
     return JsonResponse(serializer.data, safe=False)

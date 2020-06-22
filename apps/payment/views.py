@@ -10,6 +10,7 @@ from .serializers import PaymentSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
 from rest_framework.response import Response
 from datetime import timedelta, datetime
+import uuid 
 
 # Create your views here.
 
@@ -49,10 +50,10 @@ class PaymentViewSet(viewsets.ViewSet):
 
       # Create the transaction.
       Transaction.objects.create(
-        label = 'test',
+        type = instance.type,
         account = Account.objects.get(id=instance.account.id),
         payment = instance,
-        amount = 1000,
+        amount = instance.amount,
       )
 
       return Response(pay.data, status=status.HTTP_201_CREATED)
@@ -65,6 +66,15 @@ class PaymentViewSet(viewsets.ViewSet):
     serializer = PaymentSerializer(data=request.data, instance=instance)
     if serializer.is_valid():
       serializer.save()
+
+      # Create the transaction.
+      Transaction.objects.filter(payment=instance.id).update(
+        account = Account.objects.get(id=instance.account.id),
+        type = instance.type,
+        currency = instance.currency,
+        amount = instance.amount,
+      )
+
       return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
       return Response({'error': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
