@@ -8,6 +8,7 @@ from .serializers import InvoiceSerializer, InvoiceNumSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
 from .forms import InvoiceForm
 from rest_framework.response import Response
+from ..item.models import Item
 
 # Create your views here.
 
@@ -41,6 +42,8 @@ class InvoiceViewSet(viewsets.ViewSet):
     invoice = InvoiceForm(request.data, instance=instance)
     if invoice.is_valid():
       invoice = invoice.save()
+
+      item = get_object_or_404(Item, invoice=instance.id)
       serializer = InvoiceSerializer(invoice)
       return JsonResponse(serializer.data, safe=False)
     else:

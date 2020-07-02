@@ -15,5 +15,6 @@ class Item(models.Model):
     quantity = models.IntegerField()
     total = models.IntegerField()
     desc = models.CharField(max_length=200)
+    status = models.BooleanField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

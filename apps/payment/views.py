@@ -5,10 +5,10 @@ from .models import Payment
 from ..transaction.models import Transaction
 from ..account.models import Account
 from rest_framework import status
+from rest_framework.response import Response
 from rest_framework import viewsets
 from .serializers import PaymentSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
-from rest_framework.response import Response
 from datetime import timedelta, datetime
 import uuid 
 
@@ -24,9 +24,11 @@ class PaymentViewSet(viewsets.ViewSet):
       end = self.request.query_params.get('end', None)
       end = datetime.strptime(end, "%Y-%m-%d") + timedelta(days=1)
       type = self.request.query_params.get('type', None)
+      curr = self.request.query_params.get('curr', None)
       serializer = PaymentSerializer(
         Payment.objects.filter(
           created_at__range=[start, end],
+          currency=curr,
           ),
         many=True)
     else:
@@ -58,7 +60,7 @@ class PaymentViewSet(viewsets.ViewSet):
 
       return Response(pay.data, status=status.HTTP_201_CREATED)
     else:
-      return Response({'error': pay.errors}, status=status.HTTP_400_BAD_REQUEST)
+      return Response(pay.errors, status=status.HTTP_400_BAD_REQUEST)
 
   def update(self, request, pk, *args, **kwargs):
     instance = get_object_or_404(Payment, id=pk)
