@@ -4,6 +4,9 @@ from django.shortcuts import get_object_or_404
 from .models import Payment
 from ..transaction.models import Transaction
 from ..account.models import Account
+from ..bill.models import Bill
+from ..invoice.models import Invoice
+from ..account.serializers import AccountSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework import viewsets
@@ -48,34 +51,129 @@ class PaymentViewSet(viewsets.ViewSet):
   def create(self, request):
     pay = PaymentSerializer(data=request.data)
     if pay.is_valid():
-      instance = pay.save()
-
+      newPay = pay.save()
+      accnt = Account.objects.get(id=newPay.account.id);
       # Create the transaction.
       Transaction.objects.create(
-        type = instance.type,
-        account = Account.objects.get(id=instance.account.id),
-        payment = instance,
-        amount = instance.amount,
+        type = newPay.type,
+        account = accnt,
+        payment = newPay,
+        amount = newPay.amount,
       )
+
+      # Update Account balance.
+      newBalance = 0;
+      if(newPay.type == "Income"):
+        newBalance = accnt.balance + newPay.amount
+      else:
+        newBalance = accnt.balance - newPay.amount
+
+      Account.objects.filter(id=newPay.account.id).update(
+        balance= newBalance,
+      )
+
+      #update Invoice/Bill Balance
+      newBalance = 0;
+      if(newPay.type == "Income"):
+        # This is Invoice.
+        inv = Invoice.objects.get(id=pay.data['ref_inv']);
+        newBalance = inv.balance - newPay.amount
+        Invoice.objects.filter(id=pay.data['ref_inv']).update(
+          balance= newBalance,
+        )
+
+      else:
+        # This is Bill.
+        inv = Bill.objects.get(id=pay.data['ref_bill']);
+        newBalance = bill.balance - newPay.amount
+        Bill.objects.filter(id=pay.data['ref_bill']).update(
+          balance= newBalance,
+        )
 
       return Response(pay.data, status=status.HTTP_201_CREATED)
     else:
       return Response(pay.errors, status=status.HTTP_400_BAD_REQUEST)
 
   def update(self, request, pk, *args, **kwargs):
-    instance = get_object_or_404(Payment, id=pk)
+    pay = get_object_or_404(Payment, id=pk)
+    oldAmount = pay.amount
+    oldAccnt = pay.account
+    oldType = pay.type
+    oldRefBill = pay.ref_bill
+    oldRefInv = pay.ref_inv
 
-    serializer = PaymentSerializer(data=request.data, instance=instance)
+    serializer = PaymentSerializer(data=request.data, instance=pay)
     if serializer.is_valid():
-      serializer.save()
+      upPay = serializer.save()
 
+      # return Response(upPay.ref_inv, status=status.HTTP_201_CREATED)
       # Create the transaction.
-      Transaction.objects.filter(payment=instance.id).update(
-        account = Account.objects.get(id=instance.account.id),
-        type = instance.type,
-        currency = instance.currency,
-        amount = instance.amount,
+      Transaction.objects.create(
+        type = upPay.type,
+        account = upPay.account,
+        payment = upPay,
+        amount = upPay.amount,
       )
+
+      if(oldAccnt.id == upPay.account.id):
+        newBalance = 0;
+        if(pay.type == "Income"):
+          newBalance = oldAccnt.balance + (upPay.amount - oldAmount)
+        else:
+          newBalance = oldAccnt.balance - (upPay.amount + oldAmount)
+
+        Account.objects.filter(id=oldAccnt.id).update(
+          balance= newBalance,
+        )
+      else:
+        newBalance = 0;
+        if(oldType == "Income"):
+          newBalance = oldAccnt.balance - oldAmount
+        else:
+          newBalance = oldAccnt.balance + oldAmount
+
+        Account.objects.filter(id=oldAccnt.id).update(
+          balance= newBalance,
+        )
+
+        Transaction.objects.create(
+          type = upPay.type,
+          account = oldAccnt,
+          payment = upPay,
+          amount = oldAmount,
+        )
+        # Update new account
+        newBalance = 0;
+        accnt = Account.objects.get(id=upPay.account.id);
+        if(pay.type == "Income"):
+          newBalance = accnt.balance + pay.amount
+        else:
+          newBalance = accnt.balance - pay.amount
+
+        Account.objects.filter(id=upPay.account.id).update(
+          balance= newBalance,
+        )
+
+              #update Invoice/Bill Balance
+      newBalance = 0;
+      if(upPay.type == "Income"):
+        # This is Invoice.
+
+        inv = Invoice.objects.get(id=upPay.ref_inv.id);
+        newBalance = inv.balance - (upPay.amount + oldAmount)
+        return Response(newBalance, status=status.HTTP_201_CREATED)
+
+        Invoice.objects.filter(id=upPay.ref_inv.id).update(
+          balance= newBalance,
+        )
+
+      else:
+        # This is Bill.
+        inv = Bill.objects.get(id=upPay.ref_bill.id);
+        newBalance = bill.balance - upPay.amount
+        Bill.objects.filter(id=upPay.ref_bill.id).update(
+          balance= newBalance,
+        )
 
       return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
