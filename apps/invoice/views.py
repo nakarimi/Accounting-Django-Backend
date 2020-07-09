@@ -43,7 +43,7 @@ class InvoiceViewSet(viewsets.ViewSet):
     if invoice.is_valid():
       invoice = invoice.save()
 
-      item = get_object_or_404(Item, invoice=instance.id)
+      # item = get_object_or_404(Item, invoice=instance.id)
       serializer = InvoiceSerializer(invoice)
       return JsonResponse(serializer.data, safe=False)
     else:

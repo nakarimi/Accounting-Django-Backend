@@ -84,7 +84,7 @@ class PaymentViewSet(viewsets.ViewSet):
 
       else:
         # This is Bill.
-        inv = Bill.objects.get(id=pay.data['ref_bill']);
+        bill = Bill.objects.get(id=pay.data['ref_bill']);
         newBalance = bill.balance - newPay.amount
         Bill.objects.filter(id=pay.data['ref_bill']).update(
           balance= newBalance,

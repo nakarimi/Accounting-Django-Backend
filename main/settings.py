@@ -68,7 +68,7 @@ REST_FRAMEWORK = {
     )
 }
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=50),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
