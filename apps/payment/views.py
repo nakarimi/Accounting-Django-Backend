@@ -23,6 +23,7 @@ class PaymentViewSet(viewsets.ViewSet):
   def list(self, request):
 
     start = self.request.query_params.get('start', None)
+    # return JsonResponse(start, safe=False)
     if(start != None):
       end = self.request.query_params.get('end', None)
       end = datetime.strptime(end, "%Y-%m-%d") + timedelta(days=1)
