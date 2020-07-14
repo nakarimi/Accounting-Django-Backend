@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "E:\\Project\\dashboard"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.idea": true,
+			"**/.vscode": true,
+			"**/e2e": true,
+			"**/env": true,
+			"**/node_modules": true
+		}
+	}
+}
