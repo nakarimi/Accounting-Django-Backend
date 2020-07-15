@@ -7,11 +7,14 @@ from rest_framework import viewsets
 from .serializers import BillSerializer, BillNumSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
 
 class BillViewSet(viewsets.ViewSet):
+
+  permission_classes = [IsAuthenticated]
 
   def list(self, request):
     serializer = BillSerializer(Bill.objects.all(), many=True)

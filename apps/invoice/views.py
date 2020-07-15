@@ -9,11 +9,14 @@ from rest_framework.parsers import FileUploadParser, FormParser
 from .forms import InvoiceForm
 from rest_framework.response import Response
 from ..item.models import Item
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
 
 class InvoiceViewSet(viewsets.ViewSet):
+
+  permission_classes = [IsAuthenticated]
 
   def list(self, request):
     serializer = InvoiceSerializer(Invoice.objects.all(), many=True)

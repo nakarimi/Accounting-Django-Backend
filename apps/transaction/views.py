@@ -8,11 +8,15 @@ from .serializers import TransactionSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
 from rest_framework.response import Response
 from django.db.models import Count, Sum
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 
 
 class TransactionViewSet(viewsets.ViewSet):
 
+  permission_classes = [IsAuthenticated]
+  
   def list(self, request):
 
     data = Transaction.objects.all()

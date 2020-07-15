@@ -6,10 +6,13 @@ from rest_framework import viewsets
 from .serializers import VendorSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
 from .forms import VendorForm
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 
 
 class VendorViewSet(viewsets.ViewSet):
+  permission_classes = [IsAuthenticated]
 
   def list(self, request):
     serializer = VendorSerializer(Vendor.objects.all(), many=True)

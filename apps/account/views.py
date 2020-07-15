@@ -7,12 +7,15 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import AccountSerializer
 from rest_framework.parsers import FileUploadParser
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 
 
 class AccountViewSet(viewsets.ViewSet):
   parser_class = (FileUploadParser,)
-
+  permission_classes = [IsAuthenticated]
+  
   def list(self, request):
     serializer = AccountSerializer(Account.objects.all(), many=True)
     return JsonResponse(serializer.data, safe=False)
