@@ -13,8 +13,8 @@ from rest_framework.decorators import action
 from .forms import UserForm
 from rest_framework import status
 from rest_framework.response import Response
-
-
+from rest_framework.authtoken.models import Token
+from django_rest_resetpassword.models import ResetPasswordToken
 
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):
@@ -59,6 +59,23 @@ class UserViewSet(viewsets.ModelViewSet):
             return JsonResponse("Password Changed", safe=False)
         else:
             return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(
+        methods=['get'],
+        detail=False,
+        url_path='reset-token',
+        url_name='reset-token',
+    )
+    
+    def getUserToken(self, request, *args, **kwargs):
+        # user = User.objects.get(email=self.request.query_params.get('email', None))
+        user = get_object_or_404(User, email=self.request.query_params.get('email', None))
+        if(user):
+            user = get_object_or_404(ResetPasswordToken, user_id=user.id)
+            return JsonResponse(user.key, safe=False)
+        else:
+            return HttpResponse("User not found!", status=status.HTTP_400_BAD_REQUEST)
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     """

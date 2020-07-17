@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+from django.conf.urls import url, include
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -25,6 +26,9 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
+    url(r'^api/password-reset/',
+        include('django_rest_resetpassword.urls', namespace='password_reset')),
+
     path('', admin.site.urls),
     path('auth/', obtain_auth_token),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'apps.invoice',
     'apps.item',
     'apps.payment',
-    # 'apps.entity',
+    'django_rest_resetpassword',
     'apps.vendor',
     'apps.transaction',
 ]
