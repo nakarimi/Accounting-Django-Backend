@@ -13,12 +13,13 @@ from rest_framework import viewsets
 from .serializers import PaymentSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
 from datetime import timedelta, datetime
-import uuid 
-
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 
 class PaymentViewSet(viewsets.ViewSet):
+  permission_classes = (IsAuthenticated,)
 
   def list(self, request):
 

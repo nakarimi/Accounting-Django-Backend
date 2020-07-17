@@ -6,10 +6,13 @@ from rest_framework import viewsets
 from .serializers import CustomerSerializer
 from rest_framework.parsers import FileUploadParser, FormParser
 from .forms import CustomerForm
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 
 
 class CustomerViewSet(viewsets.ViewSet):
+  permission_classes = [IsAuthenticated]
 
   def list(self, request):
     serializer = CustomerSerializer(Customer.objects.all(), many=True)

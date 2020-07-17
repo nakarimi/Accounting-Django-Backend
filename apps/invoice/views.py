@@ -9,14 +9,33 @@ from rest_framework.parsers import FileUploadParser, FormParser
 from .forms import InvoiceForm
 from rest_framework.response import Response
 from ..item.models import Item
+from rest_framework.permissions import IsAuthenticated
+from datetime import timedelta, datetime
 
 # Create your views here.
 
 
 class InvoiceViewSet(viewsets.ViewSet):
 
+  permission_classes = [IsAuthenticated]
+
   def list(self, request):
-    serializer = InvoiceSerializer(Invoice.objects.all(), many=True)
+
+    start = self.request.query_params.get('start', None)
+    # return JsonResponse(start, safe=False)
+    if(start != None):
+      end = self.request.query_params.get('end', None)
+      end = datetime.strptime(end, "%Y-%m-%d") + timedelta(days=1)
+      type = self.request.query_params.get('type', None)
+      curr = self.request.query_params.get('curr', None)
+      serializer = InvoiceSerializer(
+        Invoice.objects.filter(
+          created_at__range=[start, end],
+          currency=curr,
+          ),
+        many=True)
+    else:
+      serializer = InvoiceSerializer(Invoice.objects.all(), many=True)
     return JsonResponse(serializer.data, safe=False)
 
   def retrieve(self, request, pk=None):
