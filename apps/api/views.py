@@ -45,6 +45,21 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @action(
+        methods=['post'],
+        detail=False,
+        url_path='reset-pass',
+        url_name='reset-pass',
+    )
+    def userResetPass(self, request, *args, **kwargs):
+        user = User.objects.get(username=request.data['username'])
+        if (user):
+            user.set_password(request.data['password'])
+            user = user.save()
+            return JsonResponse("Password Changed", safe=False)
+        else:
+            return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class GroupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
