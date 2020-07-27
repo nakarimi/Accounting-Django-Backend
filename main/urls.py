@@ -40,6 +40,7 @@ urlpatterns = [
     path('api/pay/', include('apps.payment.urls')),
     path('api/acnt/', include('apps.account.urls')),
     path('api/csmr/', include('apps.customer.urls')),
+    path('api/memb/', include('apps.member.urls')),
     path('api/vdr/', include('apps.vendor.urls')),
     path('api/inv/', include('apps.invoice.urls')),
     path('api/itm/', include('apps.item.urls')),
