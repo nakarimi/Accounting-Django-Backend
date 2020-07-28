@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps.uploadapp',
     'apps.account',
     'apps.customer',
+    'apps.member',
     'apps.bill',
     'apps.bill_item',
     'apps.invoice',

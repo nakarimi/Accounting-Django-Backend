@@ -39,7 +39,7 @@ class UserViewSet(viewsets.ModelViewSet):
                     user.save()
                     return JsonResponse(serializer.data, safe=False)
                 else:
-                    return Response({'Authentication': 'Wrong password.'}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({'password': 'Wrong password, please check your password.'}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 return JsonResponse(serializer.data, safe=False)
         else:
