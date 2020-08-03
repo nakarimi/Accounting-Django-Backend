@@ -26,7 +26,7 @@ SECRET_KEY = '1zm_qriuonelqn=#tk*!(pxh)#_e=6^#cz%svl5xbqn1a@u08#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['karimi73.pythonanywhere.com']
 
 
 # Application definition
@@ -156,13 +156,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = "/home/karimi73/accountingPy/static"
 CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ORIGIN_WHITELIST = [
 #     'http://localhost:4200',
 #     'http://localhost:8000',
 # ]
 MEDIA_URL = '/uploads/'
-MEDIA_ROOT = 'E:/Project/accountingPy/uploads'
+MEDIA_ROOT = '/home/karimi73/accountingPy/uploads'
 
 # https://github.com/django-money/django-money
 CURRENCY_CHOICES = [('USD', 'USD'), ('AFN', 'AFN')]
