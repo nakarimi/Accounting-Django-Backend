@@ -76,6 +76,27 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             return HttpResponse("User not found!", status=status.HTTP_400_BAD_REQUEST)
 
+    @action(
+        methods=['get'],
+        detail=False,
+        url_path='find-user',
+        url_name='find-user',
+    )
+    
+    def getUser(self, request, *args, **kwargs):
+        email = self.request.query_params.get('email', None)
+        if (email):
+            user = User.objects.filter(email=email).first()
+
+        username = self.request.query_params.get('username', None)
+        if (username):
+            user = User.objects.filter(username=username).first()
+
+        if(user):
+            return JsonResponse(False, safe=False)
+        else:
+            return JsonResponse(True, safe=False)
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
